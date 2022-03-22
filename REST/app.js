@@ -1,5 +1,5 @@
 const express = require('express');
-const feedRoutes = require('./routes/feed');
+const postRoutes = require('./routes/post');
 const app = express();
 
 
@@ -10,6 +10,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Header', 'Content-Type, Authorization');
     next();
 })
-app.use('/feed', feedRoutes);
+app.use('/post', postRoutes);
 
-app.listen(8080)
+app.listen(8000)
