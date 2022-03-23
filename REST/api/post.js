@@ -10,7 +10,9 @@ router.get('/', async function (req, res, next) {
 });
 
 router.post('/', async function (req, res, next) {
-    res.send("create list");
+    let post = await postModel.createPost("Tomorrow is another day", "ethan");
+    res.status(201).json(post.status);
+    
 });
 
 module.exports = router;

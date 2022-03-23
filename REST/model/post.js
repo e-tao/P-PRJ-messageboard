@@ -16,13 +16,20 @@ Post.getPosts = async () => {
     }
 };
 
-Post.createPost = (req, res, next) => {
-    const title = req.body.title;
-    const content = req.body.content;
-    res.status(201).json({
-        message: 'Post created successfully!',
-        post: { id: new Date().toISOString(), title: title, content: content }
-    });
+Post.createPost = async (content, user) => {
+    let postResult = {};
+
+    try {
+        let dbConn = await dbPool.getConnection();
+        let post = await dbConn.query("INSERT INTO `moodboard`.`post` (`postContent`, `addBy`) VALUES (?, ?);", [content, user])
+        dbConn.end();
+        postResult.status = "success";    
+    } catch (err) {
+        console.log(err);
+        dbConn.end();
+    }
+
+    return postResult;
 };
 
 Post.updatePost;
