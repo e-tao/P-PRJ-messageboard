@@ -1,5 +1,5 @@
 const express = require('express');
-const postRoutes = require('./routes/post');
+const postRoutes = require('./api/post');
 const app = express();
 
 
