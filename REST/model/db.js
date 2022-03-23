@@ -5,12 +5,12 @@ let dbConnPool = {
     'pool': null
 }
 
-dbConnPool.getConn() = async function () {
+dbConnPool.getConnection = async function () {
     if ((this.pool) === null) {
-        this.pool.mariadb.createPool(config.db);
+        this.pool = mariadb.createPool(config.db);
     }
 
-    return await this.pool.getConn();
+    return await this.pool.getConnection();
 };
 
 module.exports = dbConnPool;
