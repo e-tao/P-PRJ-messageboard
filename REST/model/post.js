@@ -16,7 +16,10 @@ Post.getPosts = async () => {
     }
 };
 
+
+
 Post.createPost = async (content, user) => {
+
     let postResult = {};
 
     try {
@@ -26,14 +29,45 @@ Post.createPost = async (content, user) => {
         postResult.status = "success";    
     } catch (err) {
         console.log(err);
+        postResult.status = "failed"; 
         dbConn.end();
     }
-
     return postResult;
 };
 
-Post.updatePost;
 
-Post.deletePost;
+Post.updatePost = async (content, postId) => {
+    let updateResult = {};
+
+    try {
+        let dbConn = await dbPool.getConnection();
+        let update = await dbConn.query("UPDATE `moodboard`.`post` SET `postContent`= ? WHERE  `postId`= ?;", [content, postId]);
+        dbConn.end();
+        updateResult.status = "success";    
+    } catch (err) {
+        console.log(err);
+        updateResult.status = "failed";  
+        dbConn.end();
+    }
+    return updateResult;
+};
+
+
+//need check existance of the post
+Post.deletePost = async (postId) => {
+    let deleteResult = {};
+
+    try {
+        let dbConn = await dbPool.getConnection();
+        let del = await dbConn.query("DELETE FROM `moodboard`.`post` WHERE  `postId`= ?;", [postId]);
+        dbConn.end();
+        deleteResult.status = "success";    
+    } catch (err) {
+        console.log(err);
+        deleteResult.status = "failed";  
+        dbConn.end();
+    }
+    return deleteResult;
+};
 
 module.exports = Post;
