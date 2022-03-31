@@ -11,7 +11,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.post('/', async function (req, res, next) {
-    let post = await postModel.createPost("Tomorrow is another day", "ethan"); //replace the value with value passed in by user
+    let post = await postModel.createPost(req.body.postContent, req.body.addBy); //replace the value with value passed in by user
     res.status(201).json(post.status);
 });
 
