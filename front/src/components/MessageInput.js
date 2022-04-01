@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect} from 'react';
 import { Box, Button, TextField} from "@mui/material";
+import { textAlign } from '@mui/system';
 
 
-const MessageInput = () => {
+const MessageInput = (props) => {
     
     const [inputValue, setInputValue] = useState("");
     const [updateMsg, setUpdateMsg] = useState("");
@@ -23,8 +24,9 @@ const MessageInput = () => {
             
                 const response = await fetch('http://localhost:8000/post/', requestOptions);
                 const data = await response.json();
+                console.log(data);
             }
-            // console.log(data);
+            
         }
         postMessage();
 
@@ -36,20 +38,15 @@ const MessageInput = () => {
 
     const submitHandler = (ev) => {
         ev.preventDefault();
-        setUpdateMsg(inputValue)
-        if (inputValue !== "") {
-            window.location.reload();
-        }
-        
-
-    // console.log(setUpdateMsg);
+        setUpdateMsg(inputValue);
+        setInputValue('');
     }
 
     return (
         <form onSubmit={submitHandler} >
-            <Box sx={{display:"flex", flexDirection:"column", justifyContent:"space-around", alignContent:"center"}}>
-                <TextField sx={{ m:'10pt'}} variant="outlined" label="Required" onInput={inputHandler}></TextField>
-                <Button variant='outlined' type='Submit'>Submit</Button>
+            <Box sx={{display:"flex", flexDirection:"column", justifyContent:"space-around", alignItems:"self-end"}}>
+                <TextField sx={{width:800}} margin="normal" variant="outlined" placeholder='What do you want to say?' value={inputValue} onInput={inputHandler}></TextField>
+                <Button sx={{width:100}} variant='outlined' type='Submit'>Submit</Button>
             </Box>
         </form>)
 

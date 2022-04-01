@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 
 
-const MessageList = () => {
+const MessageList = (props) => {
     
     const [Messages, setMessages] = useState([]);
+    
 
     useEffect(() => {
         async function fetchMessage () {
             const response = await fetch('http://localhost:8000/post/');
             const responseData = await response.json();
-            console.log(responseData);
+            //console.log(responseData);
 
             setMessages(responseData);
         }
         fetchMessage();
-    }, []);
+    }, [Messages]);
+
 
     const list = Messages.map((Message) =>
         <Box sx={{ bgcolor: '#2C7CDE', width: '300px', height:'auto', display: 'flex', flexDirection: "column", border:"1px", m:"10px", boxShadow:"1", borderRadius:2, opacity:"0.7", color:"#fff"}} key={Message.postId}>
