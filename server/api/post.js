@@ -21,7 +21,7 @@ router.patch('/', async function (req, res, next) {
 });
 
 router.delete('/', async function (req, res, next) {
-    let del = await postModel.deletePost(5); //replace the vvalue with value passed in by user
+    let del = await postModel.deletePost(req.body.postId); //replace the vvalue with value passed in by user
     res.status(200).json(del.status);
 })
 

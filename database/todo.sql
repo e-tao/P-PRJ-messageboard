@@ -13,12 +13,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for moodboard
-DROP DATABASE IF EXISTS `moodboard`;
-CREATE DATABASE IF NOT EXISTS `moodboard` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `moodboard`;
+-- Dumping database structure for todo
+DROP DATABASE IF EXISTS `todo`;
+CREATE DATABASE IF NOT EXISTS `todo` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `todo`;
 
--- Dumping structure for table moodboard.post
+-- Dumping structure for table todo.post
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `postId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -28,18 +28,20 @@ CREATE TABLE IF NOT EXISTS `post` (
   PRIMARY KEY (`postId`),
   KEY `FK_post_user` (`addBy`),
   CONSTRAINT `FK_post_user` FOREIGN KEY (`addBy`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table moodboard.post: ~2 rows (approximately)
+-- Dumping data for table todo.post: ~0 rows (approximately)
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
 INSERT INTO `post` (`postId`, `postContent`, `addBy`, `addAt`) VALUES
-	(1, 'A great evening to start a new project', 'ethan', '2022-03-22 20:20:45'),
-	(2, 'Some progress', 'ethan', '2022-03-22 20:59:07'),
-	(3, 'Spring is coming', 'ethan', '2022-03-23 01:40:45'),
-	(4, 'Tomorrow is another day', 'ethan', '2022-03-23 01:46:18');
+	(104, 'fix bug in this todo list app', 'ethan', '2022-05-21 00:50:31'),
+	(105, 'grocery shopping', 'ethan', '2022-05-21 00:51:23'),
+	(106, 'next week project plan', 'ethan', '2022-05-21 00:51:47'),
+	(107, 'change winter tires', 'ethan', '2022-05-21 00:52:04'),
+	(108, 'fertilize the lawn', 'ethan', '2022-05-21 00:52:12'),
+	(109, 'learn react', 'ethan', '2022-05-21 00:52:25');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 
--- Dumping structure for table moodboard.user
+-- Dumping structure for table todo.user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `userId` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -50,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table moodboard.user: ~1 rows (approximately)
+-- Dumping data for table todo.user: ~1 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`userId`, `username`, `passHash`, `cookieHash`) VALUES
 	(1, 'ethan', 'aa', '');

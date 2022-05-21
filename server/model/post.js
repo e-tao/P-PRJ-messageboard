@@ -24,12 +24,12 @@ Post.createPost = async (content, user) => {
 
     try {
         let dbConn = await dbPool.getConnection();
-        let post = await dbConn.query("INSERT INTO `moodboard`.`post` (`postContent`, `addBy`) VALUES (?, ?);", [content, user])
+        let post = await dbConn.query("INSERT INTO `todo`.`post` (`postContent`, `addBy`) VALUES (?, ?);", [content, user])
         dbConn.end();
-        postResult.status = "success";    
+        postResult.status = "success";
     } catch (err) {
         console.log(err);
-        postResult.status = "failed"; 
+        postResult.status = "failed";
         dbConn.end();
     }
     return postResult;
@@ -41,12 +41,12 @@ Post.updatePost = async (content, postId) => {
 
     try {
         let dbConn = await dbPool.getConnection();
-        let update = await dbConn.query("UPDATE `moodboard`.`post` SET `postContent`= ? WHERE  `postId`= ?;", [content, postId]);
+        let update = await dbConn.query("UPDATE `todo`.`post` SET `postContent`= ? WHERE  `postId`= ?;", [content, postId]);
         dbConn.end();
-        updateResult.status = "success";    
+        updateResult.status = "success";
     } catch (err) {
         console.log(err);
-        updateResult.status = "failed";  
+        updateResult.status = "failed";
         dbConn.end();
     }
     return updateResult;
@@ -59,12 +59,12 @@ Post.deletePost = async (postId) => {
 
     try {
         let dbConn = await dbPool.getConnection();
-        let del = await dbConn.query("DELETE FROM `moodboard`.`post` WHERE  `postId`= ?;", [postId]);
+        let del = await dbConn.query("DELETE FROM `todo`.`post` WHERE  `postId`= ?;", [postId]);
         dbConn.end();
-        deleteResult.status = "success";    
+        deleteResult.status = "success";
     } catch (err) {
         console.log(err);
-        deleteResult.status = "failed";  
+        deleteResult.status = "failed";
         dbConn.end();
     }
     return deleteResult;
